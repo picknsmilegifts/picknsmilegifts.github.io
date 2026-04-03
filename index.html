@@ -12,17 +12,18 @@
 
 <style>
 
-/* ---------------- GLOBAL ---------------- */
+/* GLOBAL */
 
 body{
 margin:0;
-font-family: "Segoe UI";
+font-family:"Segoe UI";
 background:linear-gradient(135deg,#1a0033,#0a1b5c,#3d0075);
 color:white;
 overflow-x:hidden;
+scroll-behavior:smooth;
 }
 
-/* neon glow */
+/* NEON */
 
 .neon{
 text-shadow:
@@ -32,7 +33,7 @@ text-shadow:
 0 0 40px #ff00ff;
 }
 
-/* header */
+/* HEADER */
 
 header{
 display:flex;
@@ -44,6 +45,9 @@ font-size:36px;
 font-weight:bold;
 background:#14002a;
 box-shadow:0 0 20px #ff00ff;
+position:sticky;
+top:0;
+z-index:10;
 }
 
 header img{
@@ -51,7 +55,17 @@ height:60px;
 border-radius:10px;
 }
 
-/* intro screen */
+/* SEARCH */
+
+#searchBar{
+width:300px;
+padding:10px;
+border-radius:10px;
+border:none;
+margin-top:20px;
+}
+
+/* INTRO */
 
 #intro{
 position:fixed;
@@ -75,8 +89,8 @@ animation:logoFlash 2s infinite;
 }
 
 @keyframes logoFlash{
-0%{transform:scale(1);filter:brightness(1)}
-50%{transform:scale(1.1);filter:brightness(2)}
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
 100%{transform:scale(1)}
 }
 
@@ -86,22 +100,7 @@ animation:logoFlash 2s infinite;
 100%{opacity:0;visibility:hidden}
 }
 
-/* arrow */
-
-.scroll-arrow{
-text-align:center;
-font-size:40px;
-color:#ffcc00;
-animation:bounce 1s infinite;
-margin-top:20px;
-}
-
-@keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(10px)}
-}
-
-/* products */
+/* PRODUCTS */
 
 .products{
 display:grid;
@@ -109,8 +108,6 @@ grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:40px;
 padding:50px;
 }
-
-/* product card */
 
 .card{
 background:#14002a;
@@ -131,10 +128,10 @@ width:100%;
 border-radius:15px;
 }
 
-/* buttons */
+/* BUTTON */
 
 button{
-background:#ff0066;
+background:linear-gradient(45deg,#ff0066,#ff7700);
 border:none;
 padding:10px 20px;
 color:white;
@@ -143,22 +140,24 @@ cursor:pointer;
 margin-top:10px;
 font-weight:bold;
 box-shadow:0 0 10px #ff0066;
+transition:0.3s;
 }
 
 button:hover{
-background:#ff7700;
+transform:scale(1.1);
 }
 
-/* dropdown */
+/* INPUT */
 
-select,input{
+select,input,textarea{
 padding:8px;
 border-radius:6px;
 margin-top:8px;
 border:none;
+width:90%;
 }
 
-/* cart button */
+/* CART BUTTON */
 
 #cartButton{
 position:fixed;
@@ -166,13 +165,14 @@ top:20px;
 right:20px;
 background:#ffcc00;
 color:black;
-padding:10px 15px;
-border-radius:10px;
+padding:12px 18px;
+border-radius:15px;
 font-weight:bold;
 cursor:pointer;
+box-shadow:0 0 15px #ffcc00;
 }
 
-/* cart modal */
+/* CART MODAL */
 
 #cartModal{
 display:none;
@@ -192,24 +192,39 @@ padding:30px;
 border-radius:15px;
 width:400px;
 box-shadow:0 0 30px #00ffff;
+max-height:80vh;
+overflow:auto;
 }
+
+/* CART ITEM */
 
 .cart-item{
 margin-bottom:10px;
+background:#1f003a;
+padding:10px;
+border-radius:8px;
 }
 
-/* order form */
-
-#orderForm{
-display:none;
-margin-top:20px;
-}
+/* FOOTER */
 
 footer{
 text-align:center;
-padding:20px;
+padding:30px;
 margin-top:50px;
 background:#14002a;
+box-shadow:0 0 20px #ff00ff;
+}
+
+/* FLOAT INSTAGRAM */
+
+#instaFloat{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff00ff;
+padding:12px 16px;
+border-radius:50px;
+font-weight:bold;
 box-shadow:0 0 20px #ff00ff;
 }
 
@@ -218,171 +233,132 @@ box-shadow:0 0 20px #ff00ff;
 
 <body>
 
-<!-- INTRO -->
-
 <div id="intro">
 <img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
 <h1 class="neon">Pick N Smile</h1>
 </div>
 
-<!-- MUSIC -->
-
 <audio autoplay loop>
-<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3" type="audio/mpeg">
+<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3">
 </audio>
-
-<!-- HEADER -->
 
 <header>
 <img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
 Pick N Smile
 </header>
 
-<div id="cartButton">🛒 Cart</div>
+<div style="text-align:center">
+<input id="searchBar" placeholder="Search products...">
+</div>
+
+<div id="cartButton">🛒 Cart (<span id="cartCount">0</span>)</div>
 
 <h2 style="text-align:center;margin-top:40px" class="neon">
 Items On Sale
 </h2>
 
-<div class="scroll-arrow">⬇</div>
-
-<!-- PRODUCTS -->
-
 <div class="products" id="productList"></div>
 
-<!-- CART MODAL -->
-
 <div id="cartModal">
-
 <div class="cart-content">
 
-<h2>Cart</h2>
+<h2>Shopping Cart</h2>
 
 <div id="cartItems"></div>
 
 <button onclick="showOrder()">Place Order</button>
 
-<div id="orderForm">
+<div id="orderForm" style="display:none">
 
-<input id="name" placeholder="Customer Name"><br>
-<input id="email" placeholder="Customer Email"><br>
-<input id="phone" placeholder="Customer Phone"><br>
+<h3>Customer Details</h3>
+
+<input id="name" placeholder="Customer Name">
+<input id="email" placeholder="Customer Email">
+<input id="phone" placeholder="Phone Number">
+<textarea id="address" placeholder="Delivery Address"></textarea>
 
 <button onclick="sendOrder()">Submit Order</button>
 
 </div>
 
 </div>
-
 </div>
 
+<a id="instaFloat" href="https://www.instagram.com/picknsmile4u?igsh=MmszbXY4aHB0aHRi" target="_blank">
+Instagram
+</a>
+
 <footer>
-© Pick N Smile
+
+<h3 class="neon">Pick N Smile</h3>
+
+<p>Creative Gifts & Fun Stationery</p>
+
+<p>📞 Contact: 80507 99536</p>
+
+<p>
+Instagram:
+<a href="https://www.instagram.com/picknsmile4u?igsh=MmszbXY4aHB0aHRi" target="_blank" style="color:#00ffff">
+@picknsmile4u
+</a>
+</p>
+
+<p style="font-size:13px;color:#aaa">© Pick N Smile Gifts Store</p>
+
 </footer>
 
 <script>
 
-/* ---------------- EMAIL JS INIT ---------------- */
+/* EMAILJS */
 
-window.onload = function(){
+(function(){
 emailjs.init("JGA6P6Uh3Bs-jD35I");
-};
+})();
 
-/* ---------------- CART ---------------- */
+/* CART */
 
-let cart = [];
+let cart=[];
 
-/* ---------------- PRODUCTS ---------------- */
+/* PRODUCTS */
 
-const products = [
+const products=[
 
-{
-name:"Aprons",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Aprons.jpeg",
-types:["Pink","Blue","White"]
-},
+{name:"Aprons",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Aprons.jpeg",types:["Pink","Blue","White"]},
 
-{
-name:"Bookmarks (Thread Knots)",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Bookmark%20(Thread%20Knots).jpeg",
-types:["Blue","Red","Pink","Violet"]
-},
+{name:"Bookmarks (Thread Knots)",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Bookmark%20(Thread%20Knots).jpeg",types:["Blue","Red","Pink","Violet"]},
 
-{
-name:"Colour Pencils",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Colour%20Pencils.jpeg",
-types:["12 Colours"]
-},
+{name:"Colour Pencils",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Colour%20Pencils.jpeg",types:["12 Colours"]},
 
-{
-name:"Erasers",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Erasers.jpeg",
-types:["Red","Yellow","Blue","Green"]
-},
+{name:"Erasers",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Erasers.jpeg",types:["Red","Yellow","Blue","Green"]},
 
-{
-name:"Fidget Spinners",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Fidget%20Spinners%20.jpeg",
-types:["Korean Design","Cartoon Character","Teddy Bear","Stars"]
-},
+{name:"Fidget Spinners",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Fidget%20Spinners%20.jpeg",types:["Korean","Cartoon","Teddy","Stars"]},
 
-{
-name:"Animal Sketch Book",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Funny%20Masks.jpeg",
-types:["Crocodile","Tiger","Giraffe"]
-},
+{name:"Animal Sketch Book",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Funny%20Masks.jpeg",types:["Crocodile","Tiger","Giraffe"]},
 
-{
-name:"Korean Hand Bags",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Korean%20Hand%20Bags.jpeg",
-types:["Random Colour"]
-},
+{name:"Korean Hand Bags",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Korean%20Hand%20Bags.jpeg",types:["Random"]},
 
-{
-name:"Pencil Stand",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pencil%20Stand.jpeg",
-types:["Yellow","Red","Blue"]
-},
+{name:"Pencil Stand",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pencil%20Stand.jpeg",types:["Yellow","Red","Blue"]},
 
-{
-name:"Sticky Notes",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Sticky%20Notes.jpeg",
-types:["Type 1","Type 2"]
-},
+{name:"Sticky Notes",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Sticky%20Notes.jpeg",types:["Type1","Type2"]},
 
-{
-name:"Stitch Themed Stationary Pouch",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Stitch%20Themed%20Stationary%20Pouches.jpeg",
-types:["Light Pink","Light Purple","Light Cyan","Light Grayish Brown"]
-},
+{name:"Stitch Pouch",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Stitch%20Themed%20Stationary%20Pouches.jpeg",types:["Pink","Purple","Cyan","Brown"]},
 
-{
-name:"Straw Summer Bags",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Straw%20Summer%20Bag.jpeg",
-types:["Default"]
-},
+{name:"Straw Summer Bags",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Straw%20Summer%20Bag.jpeg",types:["Default"]},
 
-{
-name:"Utensil Holders",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Utensil%20Holders.jpeg",
-types:["Blue","Pink","Light Blue","Light Green"]
-}
+{name:"Utensil Holders",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Utensil%20Holders.jpeg",types:["Blue","Pink","Light Blue","Light Green"]}
 
 ];
 
-/* ---------------- RENDER PRODUCTS ---------------- */
+/* RENDER PRODUCTS */
 
-const list = document.getElementById("productList");
+const list=document.getElementById("productList");
 
 products.forEach((p,index)=>{
 
-let options = "";
+let options="";
+p.types.forEach(t=>options+=`<option>${t}</option>`);
 
-p.types.forEach(t=>{
-options += `<option>${t}</option>`
-});
-
-list.innerHTML += `
+list.innerHTML+=`
 
 <div class="card">
 
@@ -390,30 +366,14 @@ list.innerHTML += `
 
 <h3>${p.name}</h3>
 
-<select id="type${index}">
-${options}
-</select>
-
-<br>
+<select id="type${index}">${options}</select>
 
 <select id="qty${index}">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option>
 </select>
 
-<br>
-
-<button onclick="addCart(${index})">
-Add To Cart
-</button>
+<button onclick="addCart(${index})">Add To Cart</button>
 
 </div>
 
@@ -421,58 +381,32 @@ Add To Cart
 
 });
 
-/* ---------------- ADD TO CART ---------------- */
+/* ADD CART */
 
 function addCart(i){
 
-let type = document.getElementById("type"+i).value;
-let qty = parseInt(document.getElementById("qty"+i).value);
+let type=document.getElementById("type"+i).value;
+let qty=parseInt(document.getElementById("qty"+i).value);
 
-cart.push({
-name:products[i].name,
-type:type,
-qty:qty
-});
+cart.push({name:products[i].name,type,qty});
 
-alert("Added to cart!");
-renderCart();
+updateCart();
 
 }
 
-/* ---------------- CART MODAL ---------------- */
+/* UPDATE CART */
 
-const cartBtn = document.getElementById("cartButton");
-const cartModal = document.getElementById("cartModal");
+function updateCart(){
 
-cartBtn.onclick = ()=>{
+document.getElementById("cartCount").innerText=cart.length;
 
-cartModal.style.display="flex";
-renderCart();
-
-};
-
-window.onclick = function(event){
-if(event.target == cartModal){
-cartModal.style.display = "none";
-}
-};
-
-/* ---------------- RENDER CART ---------------- */
-
-function renderCart(){
-
-let container = document.getElementById("cartItems");
+let container=document.getElementById("cartItems");
 
 container.innerHTML="";
 
-if(cart.length === 0){
-container.innerHTML="Cart is empty";
-return;
-}
-
 cart.forEach((item,index)=>{
 
-container.innerHTML += `
+container.innerHTML+=`
 <div class="cart-item">
 ${item.qty} x ${item.type} ${item.name}
 <button onclick="removeItem(${index})">❌</button>
@@ -483,88 +417,78 @@ ${item.qty} x ${item.type} ${item.name}
 
 }
 
-/* ---------------- REMOVE ITEM ---------------- */
+/* REMOVE */
 
 function removeItem(i){
-
 cart.splice(i,1);
-renderCart();
-
+updateCart();
 }
 
-/* ---------------- ORDER FORM ---------------- */
+/* CART OPEN */
+
+const cartBtn=document.getElementById("cartButton");
+const cartModal=document.getElementById("cartModal");
+
+cartBtn.onclick=()=>cartModal.style.display="flex";
+
+window.onclick=e=>{
+if(e.target==cartModal)cartModal.style.display="none";
+};
+
+/* ORDER */
 
 function showOrder(){
-
-if(cart.length === 0){
-alert("Cart is empty!");
+if(cart.length===0){
+alert("Cart empty");
 return;
 }
-
 document.getElementById("orderForm").style.display="block";
-
 }
 
-/* ---------------- SEND EMAIL ---------------- */
+/* SEND ORDER */
 
 function sendOrder(){
 
-let name = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-let phone = document.getElementById("phone").value;
-
-if(!name || !email || !phone){
-alert("Please fill all details.");
-return;
-}
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let phone=document.getElementById("phone").value;
+let address=document.getElementById("address").value;
 
 let orderText="";
 
 cart.forEach(i=>{
-orderText += `${i.qty} x ${i.type} ${i.name}\n`;
+orderText+=`${i.qty} x ${i.type} ${i.name}\n`;
 });
 
-let params = {
+let orderID="PNS-"+Math.floor(Math.random()*100000);
+
+emailjs.send("service_qnxa1we","template_pvco6lb",{
 
 customer_name:name,
 customer_email:email,
 customer_phone:phone,
+customer_address:address,
 order_items:orderText,
+order_id:orderID,
 order_date:new Date().toLocaleDateString()
-
-};
-
-emailjs.send(
-"service_qnxa1we",
-"template_pvco6lb",
-params
-)
-
-.then(function(response){
-
-alert("Order Sent Successfully!");
-
-cart=[];
-renderCart();
 
 })
 
-.catch(function(error){
+.then(()=>{
 
-alert("Email failed to send.");
-console.error(error);
+alert("Order Sent!\nOrder ID: "+orderID);
 
+cart=[];
+updateCart();
+
+})
+
+.catch(err=>{
+console.log(err);
+alert("Failed to send email");
 });
 
 }
-
-/* ---------------- AUDIO FIX ---------------- */
-
-const music = document.querySelector("audio");
-
-document.body.addEventListener("click",function(){
-music.play();
-},{once:true});
 
 </script>
 
