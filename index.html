@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick N Smile - Gifts & Stationery</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: #fff;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1a1a1a;
+      padding: 15px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #ff00ff;
+      transition: width 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffff;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?gifts,party') no-repeat center center/cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 15px #000;
+    }
+
+    .hero h2 {
+      font-size: 3.5em;
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #ff00ff;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #00ffff;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .services {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .service-card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ff00ff;
+      width: 280px;
+      margin: 20px;
+      padding: 25px;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .service-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00ffff;
+    }
+
+    .service-card h3 {
+      color: #ff00ff;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 -5px 20px #00ffff;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pick N Smile</h1>
+    <p>Fun Gifts & Creative Stationery</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Brighten Someone’s Day with a Smile!</h2>
+  </section>
+
+  <section class="section">
+    <h2>Our Collection</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>Quirky Gifts</h3>
+        <p>Unique, fun, and innovative gifts that surprise and delight.</p>
+      </div>
+      <div class="service-card">
+        <h3>Creative Stationery</h3>
+        <p>Colorful notebooks, pens, and accessories to spark creativity.</p>
+      </div>
+      <div class="service-card">
+        <h3>Party Essentials</h3>
+        <p>Bright, cheerful items to make every celebration unforgettable.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Pick N Smile. All rights reserved.</p>
+  </footer>
+</body>
+</html>
