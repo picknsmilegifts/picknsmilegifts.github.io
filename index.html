@@ -1,216 +1,236 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Pick N Smile</title>
 
-<link rel="icon" href="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
+<link rel="icon" href="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <style>
 
-/* ---------------- GLOBAL ---------------- */
+/* GLOBAL */
 
 body{
 margin:0;
-font-family: "Segoe UI";
-background:linear-gradient(135deg,#1a0033,#0a1b5c,#3d0075);
+font-family:Arial, Helvetica, sans-serif;
 color:white;
+background:linear-gradient(135deg,#ff8ad6,#b49bff,#7fd8ff,#0c2b63);
+background-size:400% 400%;
+animation:bg 14s infinite alternate;
 overflow-x:hidden;
 }
 
-/* neon glow */
-
-.neon{
-text-shadow:
-0 0 5px #ff00ff,
-0 0 10px #00ffff,
-0 0 20px #00ffff,
-0 0 40px #ff00ff;
+@keyframes bg{
+0%{background-position:0% 50%}
+100%{background-position:100% 50%}
 }
 
-/* header */
+/* NAVBAR */
 
-header{
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+height:70px;
+background:rgba(0,0,0,.65);
 display:flex;
 align-items:center;
-justify-content:center;
-gap:15px;
-padding:20px;
-font-size:36px;
+justify-content:space-between;
+padding:0 20px;
+z-index:1000;
+backdrop-filter:blur(6px);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:24px;
 font-weight:bold;
-background:#14002a;
-box-shadow:0 0 20px #ff00ff;
+text-shadow:0 0 10px #ff7cff;
 }
 
-header img{
-height:60px;
-border-radius:10px;
+.logo img{
+height:40px;
+border-radius:50%;
 }
 
-/* intro screen */
+.icons span{
+font-size:22px;
+margin-left:15px;
+cursor:pointer;
+}
+
+/* INTRO */
 
 #intro{
 position:fixed;
-top:0;
-left:0;
 width:100%;
-height:100%;
-background:linear-gradient(120deg,#ff00ff,#00ffff,#ff7700);
+height:100vh;
+background:black;
 display:flex;
 align-items:center;
 justify-content:center;
 flex-direction:column;
-z-index:1000;
-animation:introFade 4s forwards;
+z-index:3000;
 }
 
 #intro img{
 width:200px;
-border-radius:20px;
-animation:logoFlash 2s infinite;
+animation:zoom 3s forwards;
 }
 
-@keyframes logoFlash{
-0%{transform:scale(1);filter:brightness(1)}
-50%{transform:scale(1.1);filter:brightness(2)}
-100%{transform:scale(1)}
+@keyframes zoom{
+0%{opacity:0;transform:scale(.5)}
+100%{opacity:1;transform:scale(1)}
 }
 
-@keyframes introFade{
-0%{opacity:1}
-80%{opacity:1}
-100%{opacity:0;visibility:hidden}
-}
+/* HERO */
 
-/* arrow */
-
-.scroll-arrow{
+.hero{
+margin-top:90px;
 text-align:center;
-font-size:40px;
-color:#ffcc00;
-animation:bounce 1s infinite;
-margin-top:20px;
+padding:70px 20px;
+}
+
+.hero h1{
+font-size:48px;
+text-shadow:0 0 15px white;
+}
+
+.arrow{
+font-size:60px;
+animation:bounce 1.3s infinite;
 }
 
 @keyframes bounce{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(10px)}
+0%{transform:translateY(0)}
+50%{transform:translateY(14px)}
+100%{transform:translateY(0)}
 }
 
-/* products */
+/* PRODUCTS */
 
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:40px;
-padding:50px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:40px;
 }
 
-/* product card */
-
 .card{
-background:#14002a;
-border-radius:20px;
-padding:20px;
-box-shadow:0 0 20px #00ffff;
-text-align:center;
-transition:0.3s;
+background:rgba(0,0,0,.55);
+padding:18px;
+border-radius:14px;
+box-shadow:0 0 20px #64b6ff;
+transition:.35s;
 }
 
 .card:hover{
 transform:scale(1.05);
-box-shadow:0 0 30px #ff00ff;
+box-shadow:0 0 30px #ff8df4;
 }
 
 .card img{
 width:100%;
-border-radius:15px;
-}
-
-/* buttons */
-
-button{
-background:#ff0066;
-border:none;
-padding:10px 20px;
-color:white;
 border-radius:10px;
-cursor:pointer;
+}
+
+.card h3{
 margin-top:10px;
-font-weight:bold;
-box-shadow:0 0 10px #ff0066;
 }
 
-button:hover{
-background:#ff7700;
-}
-
-/* dropdown */
-
-select,input{
+.card select,
+.card input{
+width:100%;
+margin-top:8px;
 padding:8px;
 border-radius:6px;
-margin-top:8px;
 border:none;
 }
 
-/* cart button */
-
-#cartButton{
-position:fixed;
-top:20px;
-right:20px;
-background:#ffcc00;
-color:black;
-padding:10px 15px;
-border-radius:10px;
+.card button{
+margin-top:10px;
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#ff5dd2;
+color:white;
 font-weight:bold;
 cursor:pointer;
 }
 
-/* cart modal */
+/* CART */
 
-#cartModal{
+.cart{
+position:fixed;
+top:0;
+right:-420px;
+width:420px;
+height:100%;
+background:#0c0c0c;
+padding:20px;
+transition:.4s;
+z-index:1500;
+overflow:auto;
+}
+
+.cart.open{
+right:0;
+}
+
+.cart h2{
+margin-top:0;
+}
+
+.cart-item{
+border-bottom:1px solid #444;
+padding:10px 0;
+}
+
+.checkout{
+margin-top:20px;
+padding:10px;
+width:100%;
+background:#00ffc3;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* CHECKOUT FORM */
+
+.checkout-form{
 display:none;
+padding:40px;
+background:#000;
+}
+
+.checkout-form input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:none;
+}
+
+/* CONFETTI */
+
+.confetti{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
-align-items:center;
-justify-content:center;
-}
-
-.cart-content{
-background:#14002a;
-padding:30px;
-border-radius:15px;
-width:400px;
-box-shadow:0 0 30px #00ffff;
-}
-
-.cart-item{
-margin-bottom:10px;
-}
-
-/* order form */
-
-#orderForm{
-display:none;
-margin-top:20px;
-}
-
-footer{
-text-align:center;
-padding:20px;
-margin-top:50px;
-background:#14002a;
-box-shadow:0 0 20px #ff00ff;
+pointer-events:none;
 }
 
 </style>
@@ -218,299 +238,303 @@ box-shadow:0 0 20px #ff00ff;
 
 <body>
 
-<!-- INTRO -->
-
 <div id="intro">
-<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
-<h1 class="neon">Pick N Smile</h1>
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
+<h2>Pick N Smile</h2>
 </div>
-
-<!-- MUSIC -->
 
 <audio autoplay loop>
-<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3" type="audio/mpeg">
+<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3">
 </audio>
 
-<!-- HEADER -->
+<div class="navbar">
 
-<header>
-<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
+<div class="logo">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
 Pick N Smile
-</header>
+</div>
 
-<div id="cartButton">🛒 Cart</div>
+<div class="icons">
 
-<h2 style="text-align:center;margin-top:40px" class="neon">
-Items On Sale
-</h2>
+<span onclick="window.open('https://www.instagram.com/picknsmile4u?igsh=MmszbXY4aHB0aHRi')">📸</span>
 
-<div class="scroll-arrow">⬇</div>
+<span onclick="copyPhone()">📞</span>
 
-<!-- PRODUCTS -->
+<span onclick="toggleCart()">🛒</span>
 
-<div class="products" id="productList"></div>
+</div>
 
-<!-- CART MODAL -->
+</div>
 
-<div id="cartModal">
+<div class="hero">
+<h1>Items On Sale</h1>
+<div class="arrow">⬇</div>
+</div>
 
-<div class="cart-content">
+<div class="products">
 
-<h2>Cart</h2>
+<!-- APRON -->
 
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Aprons.jpeg">
+<h3>Aprons</h3>
+<select id="apronType">
+<option>Pink</option>
+<option>Blue</option>
+<option>White</option>
+</select>
+<input type="number" id="apronQty" min="1" max="10" value="1">
+<button onclick="addItem('Apron',apronType.value,apronQty.value)">Add to Cart</button>
+</div>
+
+<!-- BOOKMARK -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Bookmark%20(Thread%20Knots).jpeg">
+<h3>Bookmarks</h3>
+<select id="bookmarkType">
+<option>Blue</option>
+<option>Red</option>
+<option>Pink</option>
+<option>Violet</option>
+</select>
+<input type="number" id="bookmarkQty" min="1" max="10" value="1">
+<button onclick="addItem('Bookmark',bookmarkType.value,bookmarkQty.value)">Add</button>
+</div>
+
+<!-- COLOR PENCILS -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Colour%20Pencils.jpeg">
+<h3>Colour Pencils</h3>
+<input type="number" id="pencilQty" min="1" max="10" value="1">
+<button onclick="addItem('Colour Pencil','12 Colour Pack',pencilQty.value)">Add</button>
+</div>
+
+<!-- ERASERS -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Erasers.jpeg">
+<h3>Erasers</h3>
+<select id="eraserType">
+<option>Red</option>
+<option>Yellow</option>
+<option>Blue</option>
+<option>Green</option>
+</select>
+<input type="number" id="eraserQty" min="1" max="10" value="1">
+<button onclick="addItem('Eraser',eraserType.value,eraserQty.value)">Add</button>
+</div>
+
+<!-- FIDGET SPINNER -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Fidget%20Spinners%20.jpeg">
+<h3>Fidget Spinners</h3>
+<select id="spinType">
+<option>Korean Design</option>
+<option>Cartoon Character</option>
+<option>Teddy Bear</option>
+<option>Stars</option>
+</select>
+<input type="number" id="spinQty" min="1" max="10" value="1">
+<button onclick="addItem('Fidget Spinner',spinType.value,spinQty.value)">Add</button>
+</div>
+
+<!-- PENCIL STAND -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pencil%20Stand.jpeg">
+<h3>Pencil Stand</h3>
+<select id="standType">
+<option>Yellow</option>
+<option>Red</option>
+<option>Blue</option>
+</select>
+<input type="number" id="standQty" min="1" max="10" value="1">
+<button onclick="addItem('Pencil Stand',standType.value,standQty.value)">Add</button>
+</div>
+
+<!-- STICKY NOTES -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Sticky%20Notes.jpeg">
+<h3>Sticky Notes</h3>
+<select id="stickyType">
+<option>Type 1</option>
+<option>Type 2</option>
+</select>
+<input type="number" id="stickyQty" min="1" max="10" value="1">
+<button onclick="addItem('Sticky Notes',stickyType.value,stickyQty.value)">Add</button>
+</div>
+
+<!-- STITCH POUCH -->
+
+<div class="card">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Stitch%20Themed%20Stationary%20Pouches.jpeg">
+<h3>Stitch Pouch</h3>
+<select id="stitchType">
+<option>Light Pink</option>
+<option>Light Purple</option>
+<option>Light Cyan</option>
+<option>Light Brown</option>
+</select>
+<input type="number" id="stitchQty" min="1" max="10" value="1">
+<button onclick="addItem('Stitch Pouch',stitchType.value,stitchQty.value)">Add</button>
+</div>
+
+</div>
+
+<div class="cart" id="cart">
+<h2>Your Cart</h2>
 <div id="cartItems"></div>
-
-<button onclick="showOrder()">Place Order</button>
-
-<div id="orderForm">
-
-<input id="name" placeholder="Customer Name"><br>
-<input id="email" placeholder="Customer Email"><br>
-<input id="phone" placeholder="Customer Phone"><br>
-
-<button onclick="sendOrder()">Submit Order</button>
-
+<button class="checkout" onclick="showCheckout()">Place Order</button>
 </div>
 
-</div>
+<div class="checkout-form" id="checkout">
+
+<h2>Customer Details</h2>
+
+<input id="customerName" placeholder="Name">
+<input id="customerEmail" placeholder="Email">
+<input id="customerPhone" placeholder="Phone">
+
+<button class="checkout" onclick="sendOrder()">Submit Order</button>
 
 </div>
-
-<footer>
-© Pick N Smile
-</footer>
 
 <script>
 
-/* ---------------- EMAIL JS INIT ---------------- */
+emailjs.init("JGA6P6Uh3Bs-jD35I")
 
-(function(){
-emailjs.init("JGA6P6Uh3Bs-jD35I");
-})();
+let cart={}
 
-/* ---------------- CART ---------------- */
+function addItem(name,type,qty){
 
-let cart = [];
+qty=parseInt(qty)
 
-/* ---------------- PRODUCTS ---------------- */
+let key=name+" - "+type
 
-const products = [
+if(cart[key]){
 
-{
-name:"Aprons",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Aprons.jpeg",
-types:["Pink","Blue","White"]
-},
+cart[key]+=qty
 
-{
-name:"Bookmarks (Thread Knots)",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Bookmark%20(Thread%20Knots).jpeg",
-types:["Blue","Red","Pink","Violet"]
-},
+}else{
 
-{
-name:"Colour Pencils",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Colour%20Pencils.jpeg",
-types:["12 Colours"]
-},
-
-{
-name:"Erasers",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Erasers.jpeg",
-types:["Red","Yellow","Blue","Green"]
-},
-
-{
-name:"Fidget Spinners",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Fidget%20Spinners%20.jpeg",
-types:["Korean Design","Cartoon Character","Teddy Bear","Stars"]
-},
-
-{
-name:"Animal Sketch Book",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Funny%20Masks.jpeg",
-types:["Crocodile","Tiger","Giraffe"]
-},
-
-{
-name:"Korean Hand Bags",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Korean%20Hand%20Bags.jpeg",
-types:["Random Colour"]
-},
-
-{
-name:"Pencil Stand",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pencil%20Stand.jpeg",
-types:["Yellow","Red","Blue"]
-},
-
-{
-name:"Sticky Notes",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Sticky%20Notes.jpeg",
-types:["Type 1","Type 2"]
-},
-
-{
-name:"Stitch Themed Stationary Pouch",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Stitch%20Themed%20Stationary%20Pouches.jpeg",
-types:["Light Pink","Light Purple","Light Cyan","Light Grayish Brown"]
-},
-
-{
-name:"Straw Summer Bags",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Straw%20Summer%20Bag.jpeg",
-types:["Default"]
-},
-
-{
-name:"Utensil Holders",
-image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Utensil%20Holders.jpeg",
-types:["Blue","Pink","Light Blue","Light Green"]
-}
-
-];
-
-/* ---------------- RENDER PRODUCTS ---------------- */
-
-const list = document.getElementById("productList");
-
-products.forEach((p,index)=>{
-
-let options = "";
-
-p.types.forEach(t=>{
-options += `<option>${t}</option>`
-});
-
-list.innerHTML += `
-
-<div class="card">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<select id="type${index}">
-${options}
-</select>
-
-<br>
-
-<select id="qty${index}">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-</select>
-
-<br>
-
-<button onclick="addCart(${index})">
-Add To Cart
-</button>
-
-</div>
-
-`;
-
-});
-
-/* ---------------- ADD TO CART ---------------- */
-
-function addCart(i){
-
-let type = document.getElementById("type"+i).value;
-let qty = parseInt(document.getElementById("qty"+i).value);
-
-cart.push({
-name:products[i].name,
-type:type,
-qty:qty
-});
-
-alert("Added to cart!");
+cart[key]=qty
 
 }
 
-/* ---------------- CART MODAL ---------------- */
+updateCart()
 
-const cartBtn = document.getElementById("cartButton");
-const cartModal = document.getElementById("cartModal");
-
-cartBtn.onclick = ()=>{
-
-cartModal.style.display="flex";
-renderCart();
+confetti()
 
 }
 
-function renderCart(){
+function updateCart(){
 
-let container = document.getElementById("cartItems");
+let box=document.getElementById("cartItems")
 
-container.innerHTML="";
+box.innerHTML=""
 
-cart.forEach(item=>{
+for(let item in cart){
 
-container.innerHTML += `
-<div class="cart-item">
-${item.qty} x ${item.type} ${item.name}
-</div>
-`;
-
-});
+box.innerHTML+=`<div class="cart-item">${item} x ${cart[item]}</div>`
 
 }
 
-/* ---------------- ORDER FORM ---------------- */
+}
 
-function showOrder(){
+function toggleCart(){
 
-document.getElementById("orderForm").style.display="block";
+document.getElementById("cart").classList.toggle("open")
 
 }
 
-/* ---------------- SEND EMAIL ---------------- */
+function showCheckout(){
+
+document.getElementById("checkout").style.display="block"
+
+}
+
+let sent=false
 
 function sendOrder(){
 
-let name = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-let phone = document.getElementById("phone").value;
+if(sent){
 
-let orderText="";
+alert("Order already submitted this session")
 
-cart.forEach(i=>{
-orderText += `${i.qty} x ${i.type} ${i.name}\n`;
-});
+return
 
-let params = {
+}
+
+let name=document.getElementById("customerName").value
+let email=document.getElementById("customerEmail").value
+let phone=document.getElementById("customerPhone").value
+
+let items=""
+
+for(let i in cart){
+
+items+=i+" x "+cart[i]+"\n"
+
+}
+
+let params={
 
 customer_name:name,
 customer_email:email,
 customer_phone:phone,
-order_items:orderText,
-order_date:new Date().toLocaleDateString()
+order_items:items,
+order_date:new Date().toLocaleString()
 
-};
+}
 
-emailjs.send(
-"service_qnxa1we",
-"template_pvco6lb",
-params
-).then(()=>{
+emailjs.send("service_qnxa1we","template_pvco6lb",params)
+.then(()=>{
 
-alert("Order Sent! Company will contact you within 3 working days.");
+alert("Order Sent!")
 
-cart=[];
+sent=true
 
-});
+})
+
+}
+
+function copyPhone(){
+
+navigator.clipboard.writeText("+918050799536")
+
+alert("Phone number copied!")
+
+}
+
+setTimeout(()=>{
+
+document.getElementById("intro").style.display="none"
+
+},3000)
+
+function confetti(){
+
+for(let i=0;i<25;i++){
+
+let c=document.createElement("div")
+
+c.style.position="fixed"
+c.style.width="6px"
+c.style.height="6px"
+c.style.background="yellow"
+c.style.left=Math.random()*100+"%"
+c.style.top=Math.random()*100+"%"
+c.style.zIndex=9999
+
+document.body.appendChild(c)
+
+setTimeout(()=>c.remove(),2000)
+
+}
 
 }
 
@@ -518,3 +542,4 @@ cart=[];
 
 </body>
 </html>
+```
