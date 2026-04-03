@@ -1,226 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pick N Smile - Gifts & Stationery</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<title>Pick N Smile</title>
 
-    header {
-      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff9900);
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 0 25px #ff00ff;
-      animation: glow 5s infinite alternate;
-    }
+<link rel="icon" href="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
 
-    @keyframes glow {
-      from { box-shadow: 0 0 20px #ff00ff; }
-      to { box-shadow: 0 0 40px #00ffff; }
-    }
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-    header h1 {
-      margin: 0;
-      font-size: 3.5em;
-      color: #fff;
-      text-shadow: 0 0 15px #00ffff, 0 0 25px #ff00ff;
-      letter-spacing: 2px;
-    }
+<style>
 
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #1a1a1a;
-      padding: 15px;
-    }
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#ffb3ff,#caa0ff,#6fb7ff,#2c4cff);
+color:white;
+overflow-x:hidden;
+}
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: bold;
-      position: relative;
-      transition: color 0.3s;
-    }
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:15px;
+background:#00000099;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 3px;
-      bottom: -5px;
-      left: 0;
-      background: #ff00ff;
-      transition: width 0.3s;
-    }
+.logo{
+height:50px;
+}
 
-    nav a:hover {
-      color: #00ffff;
-    }
+.cartbtn{
+background:orange;
+border:none;
+padding:10px 20px;
+font-weight:bold;
+cursor:pointer;
+border-radius:8px;
+}
 
-    nav a:hover::after {
-      width: 100%;
-    }
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
 
-    .hero {
-      background: url('https://source.unsplash.com/1600x600/?neon,party,gifts') no-repeat center center/cover;
-      height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-      text-shadow: 0 0 20px #000;
-      animation: fadeIn 3s ease-in-out;
-    }
+.arrow{
+font-size:50px;
+animation:bounce 1s infinite;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(10px)}
+}
 
-    .hero h2 {
-      font-size: 3.5em;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #ff00ff;
-      animation: pulse 2s infinite;
-    }
+.products{
+padding-top:120px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+padding:40px;
+}
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+.card{
+background:#00000088;
+border-radius:15px;
+padding:15px;
+box-shadow:0 0 20px #ff66ff;
+text-align:center;
+}
 
-    .section {
-      padding: 60px 20px;
-      text-align: center;
-    }
+.card img{
+width:100%;
+border-radius:10px;
+}
 
-    .section h2 {
-      font-size: 2.8em;
-      margin-bottom: 30px;
-      color: #00ffff;
-      text-shadow: 0 0 15px #ff00ff;
-    }
+button{
+background:#ff4da6;
+border:none;
+padding:10px;
+margin-top:10px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
 
-    .services {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+select{
+padding:8px;
+margin-top:5px;
+}
 
-    .service-card {
-      background: #1a1a1a;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #ff00ff;
-      width: 280px;
-      margin: 20px;
-      padding: 25px;
-      transition: transform 0.4s, box-shadow 0.4s;
-      cursor: pointer;
-    }
+#cart{
+position:fixed;
+right:0;
+top:0;
+height:100%;
+width:350px;
+background:#111;
+padding:20px;
+overflow:auto;
+display:none;
+}
 
-    .service-card:hover {
-      transform: scale(1.1) rotate(2deg);
-      box-shadow: 0 0 30px #00ffff;
-    }
-
-    .service-card h3 {
-      color: #ff00ff;
-      margin-bottom: 15px;
-      text-shadow: 0 0 10px #00ffff;
-    }
-
-    footer {
-      background: #1a1a1a;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      box-shadow: 0 -5px 25px #00ffff;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.9em;
-    }
-
-    /* Floating neon shapes for interactivity */
-    .neon-shape {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background: #ff00ff;
-      border-radius: 50%;
-      box-shadow: 0 0 20px #ff00ff;
-      animation: float 6s infinite ease-in-out;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-30px); }
-      100% { transform: translateY(0); }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <!-- Background audio -->
-  <audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
-  <header>
-    <h1>Pick N Smile</h1>
-    <p>Fun Gifts & Creative Stationery</p>
-  </header>
+<audio autoplay loop>
+<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3">
+</audio>
 
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Shop</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </nav>
+<header>
+<div>
+<img class="logo" src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
+<span style="font-size:24px;font-weight:bold">Pick N Smile</span>
+</div>
 
-  <section class="hero">
-    <h2>Light Up Life with Neon Smiles!</h2>
-  </section>
+<button class="cartbtn" onclick="toggleCart()">Cart</button>
+</header>
 
-  <section class="section">
-    <h2>Our Collection</h2>
-    <div class="services">
-      <div class="service-card">
-        <h3>Quirky Gifts</h3>
-        <p>Unique, fun, and innovative gifts that surprise and delight.</p>
-      </div>
-      <div class="service-card">
-        <h3>Creative Stationery</h3>
-        <p>Colorful notebooks, pens, and accessories to spark creativity.</p>
-      </div>
-      <div class="service-card">
-        <h3>Party Essentials</h3>
-        <p>Bright, cheerful items to make every celebration unforgettable.</p>
-      </div>
-    </div>
-  </section>
 
-  <footer>
-    <p>&copy; 2026 Pick N Smile. All rights reserved.</p>
-  </footer>
+<section class="hero">
 
-  <!-- Interactive neon shapes -->
-  <div class="neon-shape" style="top: 100px; left: 50px;"></div>
-  <div class="neon-shape" style="top: 300px; left: 80%;"></div>
-  <div class="neon-shape" style="top: 600px; left: 30%;"></div>
+<h1 style="font-size:60px;text-shadow:0 0 30px pink">Pick N Smile</h1>
+
+<p>Fun gifts, colourful stationery, creative surprises and joyful return gifts.</p>
+
+<div class="arrow">↓</div>
+
+</section>
+
+
+<section class="products">
+
+<div class="card">
+<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Aprons.jpeg">
+<h3>Aprons</h3>
+
+<select id="apronType">
+<option>Pink</option>
+<option>Blue</option>
+<option>White</option>
+</select>
+
+<select id="apronQty">
+<option>1</option><option>2</option><option>3</option><option>4</option>
+<option>5</option><option>6</option><option>7</option>
+<option>8</option><option>9</option><option>10</option>
+</select>
+
+<button onclick="addToCart('Apron',apronType.value,apronQty.value)">Add To Cart</button>
+</div>
+
+
+<div class="card">
+<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Colour%20Pencils.jpeg">
+<h3>Colour Pencils</h3>
+
+<select id="pencilQty">
+<option>1</option><option>2</option><option>3</option><option>4</option>
+<option>5</option><option>6</option><option>7</option>
+<option>8</option><option>9</option><option>10</option>
+</select>
+
+<button onclick="addToCart('Colour Pencils','12 colours',pencilQty.value)">Add To Cart</button>
+</div>
+
+
+<div class="card">
+<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Erasers.jpeg">
+<h3>Erasers</h3>
+
+<select id="eraserType">
+<option>Red</option>
+<option>Yellow</option>
+<option>Blue</option>
+<option>Green</option>
+</select>
+
+<select id="eraserQty">
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option>
+</select>
+
+<button onclick="addToCart('Eraser',eraserType.value,eraserQty.value)">Add To Cart</button>
+</div>
+
+
+</section>
+
+
+<div id="cart">
+
+<h2>Shopping Cart</h2>
+
+<div id="cartItems"></div>
+
+<hr>
+
+<h3>Customer Details</h3>
+
+<input id="name" placeholder="Name"><br><br>
+<input id="email" placeholder="Email"><br><br>
+<input id="phone" placeholder="Phone"><br><br>
+
+<button onclick="placeOrder()">Place Order</button>
+
+</div>
+
+
+
+<script>
+
+emailjs.init("JGA6P6Uh3Bs-jD35I");
+
+let cart = {};
+
+function addToCart(item,type,qty){
+
+let key=item+"-"+type;
+
+qty=parseInt(qty);
+
+if(cart[key]){
+cart[key]+=qty;
+}
+else{
+cart[key]=qty;
+}
+
+updateCart();
+
+}
+
+
+function updateCart(){
+
+let list=document.getElementById("cartItems");
+
+list.innerHTML="";
+
+for(let item in cart){
+
+list.innerHTML+=item+" x "+cart[item]+"<br>";
+
+}
+
+}
+
+
+function toggleCart(){
+
+let c=document.getElementById("cart");
+
+if(c.style.display=="block"){
+c.style.display="none";
+}else{
+c.style.display="block";
+}
+
+}
+
+
+function placeOrder(){
+
+let items="";
+
+for(let i in cart){
+items+=i+" x "+cart[i]+"\n";
+}
+
+let params={
+customer_name:document.getElementById("name").value,
+customer_email:document.getElementById("email").value,
+customer_phone:document.getElementById("phone").value,
+order_items:items,
+order_date:new Date().toLocaleString()
+};
+
+emailjs.send(
+"service_qnxa1we",
+"template_pvco6lb",
+params
+);
+
+alert("Order Sent Successfully!");
+
+cart={};
+
+updateCart();
+
+}
+
+</script>
+
 </body>
 </html>
