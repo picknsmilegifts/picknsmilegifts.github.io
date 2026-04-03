@@ -11,20 +11,28 @@
       padding: 0;
       background: #0d0d0d;
       color: #fff;
+      overflow-x: hidden;
     }
 
     header {
-      background: linear-gradient(90deg, #ff00ff, #00ffff);
-      padding: 20px;
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff9900);
+      padding: 25px;
       text-align: center;
-      box-shadow: 0 0 20px #ff00ff;
+      box-shadow: 0 0 25px #ff00ff;
+      animation: glow 5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px #ff00ff; }
+      to { box-shadow: 0 0 40px #00ffff; }
     }
 
     header h1 {
       margin: 0;
-      font-size: 3em;
+      font-size: 3.5em;
       color: #fff;
-      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff;
+      text-shadow: 0 0 15px #00ffff, 0 0 25px #ff00ff;
+      letter-spacing: 2px;
     }
 
     nav {
@@ -47,7 +55,7 @@
       content: '';
       position: absolute;
       width: 0%;
-      height: 2px;
+      height: 3px;
       bottom: -5px;
       left: 0;
       background: #ff00ff;
@@ -63,22 +71,35 @@
     }
 
     .hero {
-      background: url('https://source.unsplash.com/1600x600/?gifts,party') no-repeat center center/cover;
+      background: url('https://source.unsplash.com/1600x600/?neon,party,gifts') no-repeat center center/cover;
       height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: #fff;
-      text-shadow: 0 0 15px #000;
+      text-shadow: 0 0 20px #000;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .hero h2 {
       font-size: 3.5em;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #ff00ff;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #ff00ff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .section {
@@ -87,10 +108,10 @@
     }
 
     .section h2 {
-      font-size: 2.5em;
+      font-size: 2.8em;
       margin-bottom: 30px;
       color: #00ffff;
-      text-shadow: 0 0 10px #ff00ff;
+      text-shadow: 0 0 15px #ff00ff;
     }
 
     .services {
@@ -102,21 +123,23 @@
     .service-card {
       background: #1a1a1a;
       border-radius: 15px;
-      box-shadow: 0 0 15px #ff00ff;
+      box-shadow: 0 0 20px #ff00ff;
       width: 280px;
       margin: 20px;
       padding: 25px;
       transition: transform 0.4s, box-shadow 0.4s;
+      cursor: pointer;
     }
 
     .service-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #00ffff;
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 0 30px #00ffff;
     }
 
     .service-card h3 {
       color: #ff00ff;
       margin-bottom: 15px;
+      text-shadow: 0 0 10px #00ffff;
     }
 
     footer {
@@ -124,16 +147,39 @@
       color: #fff;
       text-align: center;
       padding: 20px;
-      box-shadow: 0 -5px 20px #00ffff;
+      box-shadow: 0 -5px 25px #00ffff;
     }
 
     footer p {
       margin: 0;
       font-size: 0.9em;
     }
+
+    /* Floating neon shapes for interactivity */
+    .neon-shape {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #ff00ff;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ff00ff;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
+  <!-- Background audio -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <header>
     <h1>Pick N Smile</h1>
     <p>Fun Gifts & Creative Stationery</p>
@@ -147,7 +193,7 @@
   </nav>
 
   <section class="hero">
-    <h2>Brighten Someone’s Day with a Smile!</h2>
+    <h2>Light Up Life with Neon Smiles!</h2>
   </section>
 
   <section class="section">
@@ -171,5 +217,10 @@
   <footer>
     <p>&copy; 2026 Pick N Smile. All rights reserved.</p>
   </footer>
+
+  <!-- Interactive neon shapes -->
+  <div class="neon-shape" style="top: 100px; left: 50px;"></div>
+  <div class="neon-shape" style="top: 300px; left: 80%;"></div>
+  <div class="neon-shape" style="top: 600px; left: 30%;"></div>
 </body>
 </html>
