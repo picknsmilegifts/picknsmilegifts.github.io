@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pick N Smile</title>
 
 <link rel="icon" href="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/21a945db88963f51c1613a5f2a65d602624f7c3b/Pick%20N%20Smile.jpg">
@@ -10,7 +12,9 @@
 
 <style>
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -46,13 +50,12 @@ animation:introFade 3s 4s forwards;
 }
 
 #intro img{
-width:220px;
+width:200px;
 animation:logoGlow 1.5s infinite alternate;
 }
 
 #intro h2{
-font-size:42px;
-letter-spacing:3px;
+font-size:40px;
 animation:flashText 1s infinite alternate;
 }
 
@@ -76,15 +79,15 @@ to{opacity:0;pointer-events:none}
 header{
 display:flex;
 align-items:center;
-padding:20px;
-background:rgba(0,0,0,0.5);
+padding:15px;
+background:rgba(0,0,0,0.6);
 backdrop-filter:blur(10px);
 box-shadow:0 0 20px #ff00ff;
 }
 
 header img{
-height:60px;
-margin-right:15px;
+height:50px;
+margin-right:10px;
 }
 
 h1{
@@ -96,81 +99,54 @@ text-shadow:0 0 20px #ff00ff;
 
 .hero{
 text-align:center;
-padding:80px;
+padding:40px 20px;
 }
 
 .hero h2{
-font-size:40px;
+font-size:32px;
 text-shadow:0 0 20px cyan;
-}
-
-.arrow{
-font-size:70px;
-animation:bounce 1.5s infinite;
-}
-
-@keyframes bounce{
-0%{transform:translateY(0)}
-50%{transform:translateY(20px)}
-100%{transform:translateY(0)}
 }
 
 /* GRID */
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-padding:40px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
 }
 
 /* CARD */
 
 .card{
-background:linear-gradient(145deg,#24004d,#001a40);
-border-radius:20px;
-padding:20px;
-box-shadow:0 0 25px magenta;
-transition:0.4s;
+background:#0f0030;
+border-radius:16px;
+padding:15px;
+box-shadow:0 0 20px rgba(255,0,255,0.6);
+transition:0.3s;
 position:relative;
-overflow:hidden;
-transform-style:preserve-3d;
+z-index:5;
 }
 
 .card:hover{
-transform:scale(1.08);
-box-shadow:0 0 40px cyan;
+transform:scale(1.05);
 }
 
 .card img{
 width:100%;
-border-radius:12px;
+border-radius:10px;
 margin-bottom:10px;
 }
 
-/* shiny effect */
-
-.card:before{
-content:"";
-position:absolute;
-top:-150%;
-left:-150%;
-width:400%;
-height:400%;
-background:linear-gradient(60deg,transparent,rgba(255,255,255,0.4),transparent);
-animation:shine 6s infinite;
-}
-
-@keyframes shine{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
+.card h3{
+margin:6px 0;
 }
 
 /* INPUTS */
 
 select,input{
 width:100%;
-padding:10px;
+padding:8px;
 margin-top:8px;
 border-radius:8px;
 border:none;
@@ -180,7 +156,7 @@ border:none;
 
 button{
 width:100%;
-padding:12px;
+padding:10px;
 margin-top:10px;
 border:none;
 border-radius:10px;
@@ -190,7 +166,6 @@ color:white;
 font-weight:bold;
 cursor:pointer;
 animation:rainbowButton 5s infinite;
-box-shadow:0 0 15px magenta;
 }
 
 @keyframes rainbowButton{
@@ -203,15 +178,14 @@ box-shadow:0 0 15px magenta;
 
 #cartBtn{
 position:fixed;
-right:25px;
-bottom:25px;
+right:20px;
+bottom:20px;
 background:linear-gradient(45deg,#ff00ff,#00ffff);
-padding:22px;
+padding:18px;
 border-radius:50%;
-font-size:26px;
+font-size:24px;
 cursor:pointer;
-box-shadow:0 0 25px cyan;
-animation:pulse 1.5s infinite;
+z-index:20;
 }
 
 #cartCount{
@@ -228,26 +202,21 @@ justify-content:center;
 font-size:12px;
 }
 
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.2)}
-100%{transform:scale(1)}
-}
-
 /* CART */
 
 #cart{
 position:fixed;
-right:-420px;
+right:-380px;
 top:0;
-width:380px;
+width:340px;
+max-width:90%;
 height:100%;
-background:linear-gradient(180deg,#0a0020,#001040);
+background:#090020;
 padding:20px;
 overflow:auto;
 transition:0.4s;
 box-shadow:-10px 0 40px #ff00ff;
-z-index:10;
+z-index:25;
 }
 
 #cart.open{
@@ -257,7 +226,6 @@ right:0;
 #cart h2{
 text-align:center;
 color:#ff66ff;
-text-shadow:0 0 20px magenta;
 }
 
 /* PARTICLES */
@@ -266,40 +234,7 @@ canvas{
 position:fixed;
 top:0;
 left:0;
-z-index:-1;
-}
-
-/* CURSOR SPARKLE */
-
-.spark{
-position:fixed;
-width:6px;
-height:6px;
-background:white;
-border-radius:50%;
-pointer-events:none;
-animation:sparkFade 0.6s forwards;
-}
-
-@keyframes sparkFade{
-to{opacity:0;transform:scale(0)}
-}
-
-/* BALLOONS */
-
-.balloon{
-position:fixed;
-bottom:-120px;
-width:40px;
-height:55px;
-border-radius:50%;
-opacity:0.7;
-animation:floatBalloon linear infinite;
-}
-
-@keyframes floatBalloon{
-from{transform:translateY(0)}
-to{transform:translateY(-120vh)}
+z-index:0;
 }
 
 </style>
@@ -321,7 +256,6 @@ to{transform:translateY(-120vh)}
 
 <section class="hero">
 <h2>Items On Sale</h2>
-<div class="arrow">⬇</div>
 </section>
 
 <div class="grid" id="grid"></div>
@@ -331,6 +265,7 @@ to{transform:translateY(-120vh)}
 </div>
 
 <div id="cart">
+
 <h2>Your Cart</h2>
 <div id="cartItems"></div>
 
@@ -341,6 +276,7 @@ to{transform:translateY(-120vh)}
 <input id="phone" placeholder="Phone">
 
 <button id="orderBtn" onclick="placeOrder()">Place Order</button>
+
 </div>
 
 <audio id="music" loop>
@@ -357,24 +293,35 @@ document.getElementById("music").play()
 
 let orderPlaced=false
 
-/* PRODUCTS */
-
 const products=[
+
 {name:"Aprons",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Aprons.jpeg",types:["Pink","Blue","White"]},
+
 {name:"Bookmarks",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Bookmark%20(Thread%20Knots).jpeg",types:["Blue","Red","Pink","Violet"]},
+
 {name:"Colour Pencils",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Colour%20Pencils.jpeg",types:["12 Colour Set"]},
+
 {name:"Erasers",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Erasers.jpeg",types:["Red","Yellow","Blue","Green"]},
+
 {name:"Fidget Spinner",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Fidget%20Spinners%20.jpeg",types:["Korean Design","Cartoon Character","Teddy Bear","Stars"]},
+
 {name:"Animal Sketch Book",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Funny%20Masks.jpeg",types:["Crocodile","Tiger","Giraffe"]},
+
 {name:"Korean Hand Bag",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Korean%20Hand%20Bags.jpeg",types:["Random Colour"]},
+
 {name:"Pencil Stand",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Pencil%20Stand.jpeg",types:["Yellow","Red","Blue"]},
+
 {name:"Sticky Notes",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Sticky%20Notes.jpeg",types:["Type 1","Type 2"]},
+
 {name:"Stitch Stationary Pouch",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Stitch%20Themed%20Stationary%20Pouches.jpeg",types:["Light Pink","Light Purple","Light Cyan","Light Grayish Brown"]},
+
 {name:"Straw Summer Bag",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Straw%20Summer%20Bag.jpeg",types:["Standard"]},
+
 {name:"Utensil Holder",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Utensil%20Holders.jpeg",types:["Blue","Pink","Light Blue","Light Green"]}
+
 ]
 
-let cart={}
+let cartData={}
 
 const grid=document.getElementById("grid")
 
@@ -405,11 +352,11 @@ let qty=parseInt(document.getElementById("qty"+i).value)
 
 let key=products[i].name+" ("+type+")"
 
-if(!cart[key]) cart[key]=0
-cart[key]+=qty
+if(!cartData[key]) cartData[key]=0
+
+cartData[key]+=qty
 
 renderCart()
-playPop()
 
 }
 
@@ -420,9 +367,9 @@ div.innerHTML=""
 
 let total=0
 
-for(let item in cart){
-total+=cart[item]
-div.innerHTML+=`<p>${item} x ${cart[item]}</p>`
+for(let item in cartData){
+total+=cartData[item]
+div.innerHTML+=`<p>${item} x ${cartData[item]}</p>`
 }
 
 document.getElementById("cartCount").innerText=total
@@ -433,15 +380,15 @@ function toggleCart(){
 document.getElementById("cart").classList.toggle("open")
 }
 
-/* CLOSE CART IF CLICK OUTSIDE */
-
 document.addEventListener("click",e=>{
-const cart=document.getElementById("cart")
+
+const cartPanel=document.getElementById("cart")
 const btn=document.getElementById("cartBtn")
 
-if(!cart.contains(e.target)&&!btn.contains(e.target)){
-cart.classList.remove("open")
+if(!cartPanel.contains(e.target)&&!btn.contains(e.target)){
+cartPanel.classList.remove("open")
 }
+
 })
 
 function placeOrder(){
@@ -451,7 +398,7 @@ alert("Order already placed in this session!")
 return
 }
 
-if(Object.keys(cart).length===0){
+if(Object.keys(cartData).length===0){
 alert("Cart is empty")
 return
 }
@@ -467,8 +414,8 @@ return
 
 let items=""
 
-for(let k in cart){
-items+=k+" x "+cart[k]+"\n"
+for(let k in cartData){
+items+=k+" x "+cartData[k]+"\n"
 }
 
 orderPlaced=true
@@ -484,9 +431,8 @@ order_date:new Date().toLocaleString()
 
 }).then(()=>{
 
-confettiBurst()
 alert("Order Sent Successfully!")
-cart={}
+cartData={}
 renderCart()
 
 }).catch(()=>{
@@ -499,87 +445,32 @@ document.getElementById("orderBtn").disabled=false
 
 }
 
-/* CONFETTI */
-
-function confettiBurst(){
-
-for(let i=0;i<120;i++){
-
-let c=document.createElement("div")
-
-c.style.position="fixed"
-c.style.width="6px"
-c.style.height="6px"
-c.style.background=`hsl(${Math.random()*360},100%,60%)`
-c.style.left=Math.random()*100+"%"
-c.style.top="-10px"
-
-document.body.appendChild(c)
-
-let fall=setInterval(()=>{
-
-let top=parseFloat(c.style.top)
-c.style.top=top+5+"px"
-
-if(top>window.innerHeight){
-clearInterval(fall)
-c.remove()
-}
-
-},20)
-
-}
-
-}
-
-/* CURSOR SPARKLE */
-
-document.addEventListener("mousemove",e=>{
-
-let s=document.createElement("div")
-s.className="spark"
-s.style.left=e.clientX+"px"
-s.style.top=e.clientY+"px"
-
-document.body.appendChild(s)
-
-setTimeout(()=>s.remove(),600)
-
-})
-
-/* BALLOONS */
-
-for(let i=0;i<15;i++){
-
-let b=document.createElement("div")
-b.className="balloon"
-b.style.left=Math.random()*100+"%"
-b.style.background=`hsl(${Math.random()*360},80%,60%)`
-b.style.animationDuration=8+Math.random()*8+"s"
-
-document.body.appendChild(b)
-
-}
-
 /* PARTICLES */
 
 const canvas=document.getElementById("particles")
 const ctx=canvas.getContext("2d")
 
+function resize(){
 canvas.width=window.innerWidth
 canvas.height=window.innerHeight
+}
+
+resize()
+window.addEventListener("resize",resize)
 
 let particles=[]
 
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
 
 particles.push({
+
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-vx:(Math.random()-0.5)*3,
-vy:(Math.random()-0.5)*3,
-size:2+Math.random()*4,
+vx:(Math.random()-0.5)*2,
+vy:(Math.random()-0.5)*2,
+size:2+Math.random()*3,
 color:`hsl(${Math.random()*360},100%,60%)`
+
 })
 
 }
@@ -608,15 +499,6 @@ requestAnimationFrame(animate)
 }
 
 animate()
-
-/* ADD SOUND */
-
-function playPop(){
-
-let audio=new Audio("https://assets.mixkit.co/sfx/preview/mixkit-bubble-pop-up-alert-notification-2357.mp3")
-audio.play()
-
-}
 
 </script>
 
