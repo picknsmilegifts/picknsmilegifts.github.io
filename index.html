@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Pick N Smile</title>
 
-<link rel="icon" href="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
+<link rel="icon" href="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
@@ -16,8 +16,44 @@
 body{
 margin:0;
 font-family:Segoe UI;
-background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+background:linear-gradient(135deg,#2b006b,#001f5c,#3b008b);
 color:white;
+overflow-x:hidden;
+}
+
+/* INTRO */
+
+#intro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:linear-gradient(120deg,#ff2a8a,#7b4dff,#1aa3ff);
+z-index:9999;
+animation:introFade 4s forwards;
+}
+
+#intro img{
+width:200px;
+border-radius:20px;
+animation:logoFlash 1.5s infinite;
+}
+
+@keyframes logoFlash{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+@keyframes introFade{
+0%{opacity:1}
+80%{opacity:1}
+100%{opacity:0;visibility:hidden}
 }
 
 /* HEADER */
@@ -27,26 +63,39 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:15px;
-padding:18px;
-font-size:32px;
+padding:20px;
+font-size:34px;
 font-weight:bold;
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px #ff00ff;
+background:#14002a;
+box-shadow:0 0 20px #ff2a8a;
 }
 
 header img{
-height:55px;
+height:60px;
 border-radius:10px;
+}
+
+/* ARROW */
+
+.arrow{
+text-align:center;
+font-size:50px;
+color:#ffcc00;
+animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(10px)}
 }
 
 /* PRODUCTS */
 
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-padding:40px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:40px;
+padding:50px;
 }
 
 /* CARD */
@@ -54,66 +103,65 @@ padding:40px;
 .card{
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(8px);
+border-radius:20px;
 padding:20px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,255,255,0.4);
-transition:0.3s;
 text-align:center;
+box-shadow:0 0 15px #00ffff;
+transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-5px) scale(1.03);
-box-shadow:0 0 30px rgba(255,0,255,0.6);
+transform:scale(1.05);
+box-shadow:0 0 30px #ff00ff;
 }
 
 .card img{
 width:100%;
-border-radius:10px;
+border-radius:12px;
 }
 
-/* INPUTS */
-
-select,input,textarea{
-width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-border:none;
-}
-
-/* BUTTONS */
+/* BUTTON */
 
 button{
-margin-top:10px;
-padding:10px 16px;
+background:#ff0066;
 border:none;
-border-radius:8px;
-background:linear-gradient(45deg,#ff0080,#ff8c00);
+padding:10px 20px;
+border-radius:10px;
 color:white;
 font-weight:bold;
 cursor:pointer;
+margin-top:10px;
+box-shadow:0 0 10px #ff0066;
 }
 
 button:hover{
-transform:scale(1.05);
+background:#ff7700;
 }
 
-/* CART BUTTON */
+/* INPUT */
+
+select,input,textarea{
+width:90%;
+padding:10px;
+margin-top:8px;
+border-radius:8px;
+border:none;
+}
+
+/* CART */
 
 #cartButton{
 position:fixed;
 top:20px;
 right:20px;
-background:#ffd000;
+background:#ffcc00;
 color:black;
-padding:10px 15px;
-border-radius:10px;
+padding:12px 16px;
+border-radius:12px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:0 0 10px #ffd000;
+box-shadow:0 0 20px #ffcc00;
 }
-
-/* CART MODAL */
 
 #cartModal{
 display:none;
@@ -128,12 +176,13 @@ justify-content:center;
 }
 
 .cartBox{
-background:#111;
-padding:25px;
+background:#14002a;
+padding:30px;
 border-radius:15px;
 width:420px;
 max-height:80vh;
 overflow-y:auto;
+box-shadow:0 0 20px #00ffff;
 }
 
 .cartItem{
@@ -142,19 +191,13 @@ justify-content:space-between;
 margin-bottom:10px;
 }
 
-/* SUCCESS POPUP */
+/* FOOTER */
 
-#successPopup{
-display:none;
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:#111;
-padding:30px;
-border-radius:15px;
-box-shadow:0 0 20px #00ffcc;
+footer{
 text-align:center;
+padding:20px;
+background:#14002a;
+box-shadow:0 0 20px #ff00ff;
 }
 
 </style>
@@ -162,14 +205,31 @@ text-align:center;
 
 <body>
 
+<!-- INTRO -->
+
+<div id="intro">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
+<h1>Pick N Smile</h1>
+</div>
+
+<!-- MUSIC -->
+
+<audio id="music" autoplay loop>
+<source src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/refs/heads/main/the_mountain-happy-happy-music-496549.mp3">
+</audio>
+
+<!-- HEADER -->
+
 <header>
-<img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pick%20N%20Smile.jpg">
+<img src="https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Pick%20N%20Smile.jpg">
 Pick N Smile
 </header>
 
-<div id="cartButton">
-🛒 Cart (<span id="cartCount">0</span>)
-</div>
+<div id="cartButton">🛒 Cart (<span id="cartCount">0</span>)</div>
+
+<h2 style="text-align:center;margin-top:40px">Items On Sale</h2>
+
+<div class="arrow">⬇</div>
 
 <div class="products" id="productList"></div>
 
@@ -184,68 +244,56 @@ Pick N Smile
 <div id="cartItems"></div>
 
 <button onclick="showOrder()">Place Order</button>
-<button onclick="closeCart()">Close</button>
 
 <div id="orderForm" style="display:none">
 
 <h3>Customer Details</h3>
 
-<input id="name" placeholder="Name">
-<input id="email" placeholder="Email">
-<input id="phone" placeholder="Phone">
-<textarea id="address" placeholder="Address"></textarea>
+<input id="name" placeholder="Customer Name">
+<input id="email" placeholder="Customer Email">
+<input id="phone" placeholder="Customer Phone">
 
-<h4>Order Summary</h4>
+<h3>Order Summary</h3>
 
-<div id="orderSummary"></div>
+<pre id="orderSummary"></pre>
 
-<button onclick="sendOrder()">Confirm Order</button>
-
-</div>
+<button onclick="sendOrder()">Submit Order</button>
 
 </div>
 
 </div>
 
-<div id="successPopup">
-<h2>Order Sent 🎉</h2>
-<p>Your order has been submitted successfully.</p>
-<button onclick="closeSuccess()">OK</button>
 </div>
+
+<footer>
+
+Contact: 80507 99536  
+<br>
+© Pick N Smile
+
+</footer>
 
 <script>
 
-/* EMAILJS */
-
 emailjs.init("JGA6P6Uh3Bs-jD35I");
 
-/* CART */
-
-let cart=[];
+let cart={};
 
 /* PRODUCTS */
 
 const products=[
 
-{name:"Aprons",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Aprons.jpeg",types:["Pink","Blue","White"]},
+{name:"Aprons",img:["https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Aprons.jpeg"],types:["Pink","Blue","White"]},
 
-{name:"Bookmarks",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Bookmark%20(Thread%20Knots).jpeg",types:["Blue","Red","Pink","Violet"]},
+{name:"Bookmarks (Thread Knots)",img:["https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Bookmark%20(Thread%20Knots).jpeg"],types:["Blue","Red","Pink","Violet"]},
 
-{name:"Colour Pencils",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Colour%20Pencils.jpeg",types:["12 Colours"]},
+{name:"Colour Pencils",img:["https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Colour%20Pencils.jpeg"],types:["12 Colours"]},
 
-{name:"Erasers",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Erasers.jpeg",types:["Red","Yellow","Blue","Green"]},
+{name:"Erasers",img:["https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Erasers.jpeg"],types:["Red","Yellow","Blue","Green"]},
 
-{name:"Fidget Spinners",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Fidget%20Spinners%20.jpeg",types:["Korean","Cartoon","Teddy","Stars"]},
-
-{name:"Pencil Stand",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Pencil%20Stand.jpeg",types:["Yellow","Red","Blue"]},
-
-{name:"Sticky Notes",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Sticky%20Notes.jpeg",types:["Type 1","Type 2"]},
-
-{name:"Stitch Pouch",image:"https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/main/Stitch%20Themed%20Stationary%20Pouches.jpeg",types:["Pink","Purple","Cyan","Brown"]}
+{name:"Fidget Spinners",img:["https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/main/Fidget%20Spinners%20.jpeg"],types:["Korean Design","Cartoon Character","Teddy Bear","Stars"]}
 
 ];
-
-/* RENDER PRODUCTS */
 
 const list=document.getElementById("productList");
 
@@ -261,23 +309,32 @@ list.innerHTML+=`
 
 <div class="card">
 
-<img src="${p.image}">
+<img src="${p.img[0]}">
 
 <h3>${p.name}</h3>
 
 <select id="type${i}">
+
 ${options}
+
 </select>
 
 <select id="qty${i}">
+
 <option>1</option>
 <option>2</option>
 <option>3</option>
 <option>4</option>
 <option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+
 </select>
 
-<button onclick="addCart(${i})">Add to Cart</button>
+<button onclick="addCart(${i})">Add To Cart</button>
 
 </div>
 
@@ -285,34 +342,22 @@ ${options}
 
 });
 
-/* ADD CART */
-
 function addCart(i){
 
 let type=document.getElementById("type"+i).value;
-let qty=document.getElementById("qty"+i).value;
+let qty=parseInt(document.getElementById("qty"+i).value);
 
-cart.push({
-name:products[i].name,
-type:type,
-qty:qty
-});
+let key=products[i].name+"-"+type;
 
-updateCart();
-
+if(cart[key]){
+cart[key].qty+=qty;
+}else{
+cart[key]={name:products[i].name,type:type,qty:qty};
 }
-
-/* UPDATE CART */
-
-function updateCart(){
-
-document.getElementById("cartCount").innerText=cart.length;
 
 renderCart();
 
 }
-
-/* RENDER CART */
 
 function renderCart(){
 
@@ -320,12 +365,13 @@ let container=document.getElementById("cartItems");
 
 container.innerHTML="";
 
-if(cart.length==0){
-container.innerHTML="Cart Empty";
-return;
-}
+let count=0;
 
-cart.forEach((item,i)=>{
+for(let key in cart){
+
+let item=cart[key];
+
+count+=item.qty;
 
 container.innerHTML+=`
 
@@ -333,75 +379,56 @@ container.innerHTML+=`
 
 ${item.qty} x ${item.type} ${item.name}
 
-<button onclick="removeItem(${i})">❌</button>
+<button onclick="removeItem('${key}')">❌</button>
 
 </div>
 
 `;
 
-});
+}
+
+document.getElementById("cartCount").innerText=count;
 
 }
 
-/* REMOVE */
-
-function removeItem(i){
-cart.splice(i,1);
-updateCart();
+function removeItem(key){
+delete cart[key];
+renderCart();
 }
-
-/* OPEN CART */
 
 document.getElementById("cartButton").onclick=()=>{
 document.getElementById("cartModal").style.display="flex";
 };
 
-/* CLOSE CART */
-
-function closeCart(){
-document.getElementById("cartModal").style.display="none";
-}
-
-/* ORDER */
-
 function showOrder(){
-
-if(cart.length==0){
-alert("Cart Empty");
-return;
-}
 
 document.getElementById("orderForm").style.display="block";
 
-let summary="";
+let order="";
 
-cart.forEach(i=>{
-summary+=`${i.qty} x ${i.type} ${i.name}\n`;
-});
-
-document.getElementById("orderSummary").innerText=summary;
-
+for(let key in cart){
+let i=cart[key];
+order+=`${i.qty} x ${i.type} ${i.name}\n`;
 }
 
-/* SEND ORDER */
+document.getElementById("orderSummary").innerText=order;
+
+}
 
 function sendOrder(){
 
 let name=document.getElementById("name").value;
 let email=document.getElementById("email").value;
 let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
-
-if(!name || !email || !phone || !address){
-alert("Fill all fields");
-return;
-}
 
 let order="";
 
-cart.forEach(i=>{
+for(let key in cart){
+let i=cart[key];
 order+=`${i.qty} x ${i.type} ${i.name}\n`;
-});
+}
+
+let date=new Date().toLocaleDateString();
 
 emailjs.send(
 "service_qnxa1we",
@@ -410,32 +437,37 @@ emailjs.send(
 customer_name:name,
 customer_email:email,
 customer_phone:phone,
-customer_address:address,
-order_items:order
+order_items:order,
+order_date:date
 })
 
 .then(()=>{
 
-cart=[];
-updateCart();
+alert("Order Sent Successfully!");
+
+cart={};
+
+renderCart();
 
 document.getElementById("cartModal").style.display="none";
-
-document.getElementById("successPopup").style.display="block";
 
 })
 
 .catch(()=>{
+
 alert("Email failed");
+
 });
 
 }
 
-/* SUCCESS POPUP */
+/* MUSIC AUTOPLAY FIX */
 
-function closeSuccess(){
-document.getElementById("successPopup").style.display="none";
-}
+document.body.addEventListener("click",()=>{
+
+document.getElementById("music").play();
+
+},{once:true});
 
 </script>
 
