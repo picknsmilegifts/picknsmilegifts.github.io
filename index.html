@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <title>Pick N Smile</title>
 
 <link rel="icon" href="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/21a945db88963f51c1613a5f2a65d602624f7c3b/Pick%20N%20Smile.jpg">
@@ -11,15 +10,25 @@
 
 <style>
 
+*{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Segoe UI;
-background:linear-gradient(140deg,#170032,#031a40,#00142a);
 color:white;
 overflow-x:hidden;
+
+background:linear-gradient(120deg,#2b0066,#000d33,#003366,#2b0066);
+background-size:400% 400%;
+animation:bgMove 15s infinite linear;
 }
 
-/* intro */
+@keyframes bgMove{
+0%{background-position:0%}
+100%{background-position:400%}
+}
+
+/* INTRO */
 
 #intro{
 position:fixed;
@@ -27,37 +36,50 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:#000;
+background:radial-gradient(circle,#000,#140033);
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 z-index:999;
-animation:fadeOut 2s 3s forwards;
+animation:introFade 3s 4s forwards;
 }
 
 #intro img{
-width:200px;
-animation:logoGlow 2s infinite alternate;
+width:220px;
+animation:logoGlow 1.5s infinite alternate;
+}
+
+#intro h2{
+font-size:42px;
+letter-spacing:3px;
+animation:flashText 1s infinite alternate;
 }
 
 @keyframes logoGlow{
-from{filter:drop-shadow(0 0 10px pink)}
+from{filter:drop-shadow(0 0 10px #ff00ff)}
 to{filter:drop-shadow(0 0 40px cyan)}
 }
 
-@keyframes fadeOut{
+@keyframes flashText{
+0%{color:#ff00ff}
+50%{color:#00ffff}
+100%{color:#ffff00}
+}
+
+@keyframes introFade{
 to{opacity:0;pointer-events:none}
 }
 
-/* header */
+/* HEADER */
 
 header{
 display:flex;
 align-items:center;
 padding:20px;
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.5);
 backdrop-filter:blur(10px);
+box-shadow:0 0 20px #ff00ff;
 }
 
 header img{
@@ -66,21 +88,20 @@ margin-right:15px;
 }
 
 h1{
-color:#ffb3ff;
-text-shadow:0 0 20px #ff4dd2;
+color:#ffccff;
+text-shadow:0 0 20px #ff00ff;
 }
 
-/* hero */
+/* HERO */
 
 .hero{
 text-align:center;
-padding:90px;
+padding:80px;
 }
 
 .hero h2{
 font-size:40px;
-color:#ffd6ff;
-text-shadow:0 0 25px violet;
+text-shadow:0 0 20px cyan;
 }
 
 .arrow{
@@ -94,28 +115,31 @@ animation:bounce 1.5s infinite;
 100%{transform:translateY(0)}
 }
 
-/* grid */
+/* GRID */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:35px;
+gap:30px;
 padding:40px;
 }
 
-/* product card */
+/* CARD */
 
 .card{
-background:rgba(255,255,255,0.06);
+background:linear-gradient(145deg,#24004d,#001a40);
 border-radius:20px;
 padding:20px;
-box-shadow:0 0 30px rgba(255,0,200,0.4);
-transition:0.3s;
+box-shadow:0 0 25px magenta;
+transition:0.4s;
+position:relative;
+overflow:hidden;
+transform-style:preserve-3d;
 }
 
 .card:hover{
-transform:scale(1.05);
-box-shadow:0 0 60px rgba(0,255,255,0.7);
+transform:scale(1.08);
+box-shadow:0 0 40px cyan;
 }
 
 .card img{
@@ -124,64 +148,119 @@ border-radius:12px;
 margin-bottom:10px;
 }
 
-select{
+/* shiny effect */
+
+.card:before{
+content:"";
+position:absolute;
+top:-150%;
+left:-150%;
+width:400%;
+height:400%;
+background:linear-gradient(60deg,transparent,rgba(255,255,255,0.4),transparent);
+animation:shine 6s infinite;
+}
+
+@keyframes shine{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+/* INPUTS */
+
+select,input{
 width:100%;
 padding:10px;
-margin-top:6px;
+margin-top:8px;
 border-radius:8px;
 border:none;
 }
+
+/* BUTTON */
 
 button{
 width:100%;
 padding:12px;
-margin-top:8px;
+margin-top:10px;
 border:none;
-border-radius:8px;
-background:#ff3d8f;
+border-radius:10px;
+background:linear-gradient(45deg,#ff0080,#ff8c00,#40e0d0);
+background-size:300%;
 color:white;
 font-weight:bold;
 cursor:pointer;
+animation:rainbowButton 5s infinite;
+box-shadow:0 0 15px magenta;
 }
 
-/* cart */
+@keyframes rainbowButton{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
+
+/* CART BUTTON */
 
 #cartBtn{
 position:fixed;
 right:25px;
 bottom:25px;
-background:#ff006e;
-padding:18px;
+background:linear-gradient(45deg,#ff00ff,#00ffff);
+padding:22px;
 border-radius:50%;
-font-size:22px;
+font-size:26px;
 cursor:pointer;
+box-shadow:0 0 25px cyan;
+animation:pulse 1.5s infinite;
 }
+
+#cartCount{
+position:absolute;
+top:-8px;
+right:-8px;
+background:red;
+width:22px;
+height:22px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+/* CART */
 
 #cart{
 position:fixed;
-right:-400px;
+right:-420px;
 top:0;
-width:360px;
+width:380px;
 height:100%;
-background:#050010;
+background:linear-gradient(180deg,#0a0020,#001040);
 padding:20px;
 overflow:auto;
 transition:0.4s;
+box-shadow:-10px 0 40px #ff00ff;
+z-index:10;
 }
 
 #cart.open{
 right:0;
 }
 
-input{
-width:100%;
-padding:10px;
-margin-top:8px;
-border-radius:8px;
-border:none;
+#cart h2{
+text-align:center;
+color:#ff66ff;
+text-shadow:0 0 20px magenta;
 }
 
-/* particles */
+/* PARTICLES */
 
 canvas{
 position:fixed;
@@ -190,44 +269,69 @@ left:0;
 z-index:-1;
 }
 
+/* CURSOR SPARKLE */
+
+.spark{
+position:fixed;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+pointer-events:none;
+animation:sparkFade 0.6s forwards;
+}
+
+@keyframes sparkFade{
+to{opacity:0;transform:scale(0)}
+}
+
+/* BALLOONS */
+
+.balloon{
+position:fixed;
+bottom:-120px;
+width:40px;
+height:55px;
+border-radius:50%;
+opacity:0.7;
+animation:floatBalloon linear infinite;
+}
+
+@keyframes floatBalloon{
+from{transform:translateY(0)}
+to{transform:translateY(-120vh)}
+}
+
 </style>
 </head>
 
 <body>
 
 <div id="intro">
-
 <img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/21a945db88963f51c1613a5f2a65d602624f7c3b/Pick%20N%20Smile.jpg">
 <h2>Pick N Smile</h2>
-
 </div>
 
 <canvas id="particles"></canvas>
 
 <header>
-
 <img src="https://github.com/picknsmilegifts/picknsmilegifts.github.io/raw/21a945db88963f51c1613a5f2a65d602624f7c3b/Pick%20N%20Smile.jpg">
-
 <h1>Pick N Smile</h1>
-
 </header>
 
 <section class="hero">
-
 <h2>Items On Sale</h2>
-
 <div class="arrow">⬇</div>
-
 </section>
 
 <div class="grid" id="grid"></div>
 
-<div id="cartBtn" onclick="toggleCart()">🛒</div>
+<div id="cartBtn" onclick="toggleCart()">🛒
+<div id="cartCount">0</div>
+</div>
 
 <div id="cart">
-
 <h2>Your Cart</h2>
-
 <div id="cartItems"></div>
 
 <h3>Checkout</h3>
@@ -236,8 +340,7 @@ z-index:-1;
 <input id="email" placeholder="Email">
 <input id="phone" placeholder="Phone">
 
-<button onclick="placeOrder()">Place Order</button>
-
+<button id="orderBtn" onclick="placeOrder()">Place Order</button>
 </div>
 
 <audio id="music" loop>
@@ -252,32 +355,23 @@ document.body.addEventListener("click",()=>{
 document.getElementById("music").play()
 },{once:true})
 
+let orderPlaced=false
+
+/* PRODUCTS */
+
 const products=[
-
 {name:"Aprons",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Aprons.jpeg",types:["Pink","Blue","White"]},
-
 {name:"Bookmarks",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Bookmark%20(Thread%20Knots).jpeg",types:["Blue","Red","Pink","Violet"]},
-
 {name:"Colour Pencils",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Colour%20Pencils.jpeg",types:["12 Colour Set"]},
-
 {name:"Erasers",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Erasers.jpeg",types:["Red","Yellow","Blue","Green"]},
-
 {name:"Fidget Spinner",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Fidget%20Spinners%20.jpeg",types:["Korean Design","Cartoon Character","Teddy Bear","Stars"]},
-
 {name:"Animal Sketch Book",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Funny%20Masks.jpeg",types:["Crocodile","Tiger","Giraffe"]},
-
 {name:"Korean Hand Bag",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Korean%20Hand%20Bags.jpeg",types:["Random Colour"]},
-
 {name:"Pencil Stand",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Pencil%20Stand.jpeg",types:["Yellow","Red","Blue"]},
-
 {name:"Sticky Notes",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Sticky%20Notes.jpeg",types:["Type 1","Type 2"]},
-
 {name:"Stitch Stationary Pouch",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Stitch%20Themed%20Stationary%20Pouches.jpeg",types:["Light Pink","Light Purple","Light Cyan","Light Grayish Brown"]},
-
 {name:"Straw Summer Bag",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Straw%20Summer%20Bag.jpeg",types:["Standard"]},
-
 {name:"Utensil Holder",img:"https://raw.githubusercontent.com/picknsmilegifts/picknsmilegifts.github.io/3bb36d2415c0c807aacb454d74f3c83be70f5ff1/Utensil%20Holders.jpeg",types:["Blue","Pink","Light Blue","Light Green"]}
-
 ]
 
 let cart={}
@@ -290,25 +384,14 @@ let card=document.createElement("div")
 card.className="card"
 
 let typeOptions=p.types.map(t=>`<option>${t}</option>`).join("")
-
 let qtyOptions=[1,2,3,4,5,6,7,8,9,10].map(n=>`<option>${n}</option>`).join("")
 
 card.innerHTML=`
-
 <img src="${p.img}">
-
 <h3>${p.name}</h3>
-
-<select id="type${i}">
-${typeOptions}
-</select>
-
-<select id="qty${i}">
-${qtyOptions}
-</select>
-
+<select id="type${i}">${typeOptions}</select>
+<select id="qty${i}">${qtyOptions}</select>
 <button onclick="addCart(${i})">Add To Cart</button>
-
 `
 
 grid.appendChild(card)
@@ -323,41 +406,54 @@ let qty=parseInt(document.getElementById("qty"+i).value)
 let key=products[i].name+" ("+type+")"
 
 if(!cart[key]) cart[key]=0
-
 cart[key]+=qty
 
 renderCart()
+playPop()
 
 }
 
 function renderCart(){
 
 let div=document.getElementById("cartItems")
-
 div.innerHTML=""
 
+let total=0
+
 for(let item in cart){
-
+total+=cart[item]
 div.innerHTML+=`<p>${item} x ${cart[item]}</p>`
-
 }
+
+document.getElementById("cartCount").innerText=total
 
 }
 
 function toggleCart(){
-
 document.getElementById("cart").classList.toggle("open")
-
 }
+
+/* CLOSE CART IF CLICK OUTSIDE */
+
+document.addEventListener("click",e=>{
+const cart=document.getElementById("cart")
+const btn=document.getElementById("cartBtn")
+
+if(!cart.contains(e.target)&&!btn.contains(e.target)){
+cart.classList.remove("open")
+}
+})
 
 function placeOrder(){
 
-if(Object.keys(cart).length===0){
-
-alert("Cart is empty")
-
+if(orderPlaced){
+alert("Order already placed in this session!")
 return
+}
 
+if(Object.keys(cart).length===0){
+alert("Cart is empty")
+return
 }
 
 let name=document.getElementById("name").value
@@ -365,20 +461,18 @@ let email=document.getElementById("email").value
 let phone=document.getElementById("phone").value
 
 if(!name||!email||!phone){
-
 alert("Please fill all details")
-
 return
-
 }
 
 let items=""
 
 for(let k in cart){
-
 items+=k+" x "+cart[k]+"\n"
-
 }
+
+orderPlaced=true
+document.getElementById("orderBtn").disabled=true
 
 emailjs.send("service_qnxa1we","template_pvco6lb",{
 
@@ -390,23 +484,84 @@ order_date:new Date().toLocaleString()
 
 }).then(()=>{
 
+confettiBurst()
 alert("Order Sent Successfully!")
-
 cart={}
-
 renderCart()
 
-}).catch(e=>{
+}).catch(()=>{
 
 alert("Order Failed")
-
-console.log(e)
+orderPlaced=false
+document.getElementById("orderBtn").disabled=false
 
 })
 
 }
 
-/* particles */
+/* CONFETTI */
+
+function confettiBurst(){
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div")
+
+c.style.position="fixed"
+c.style.width="6px"
+c.style.height="6px"
+c.style.background=`hsl(${Math.random()*360},100%,60%)`
+c.style.left=Math.random()*100+"%"
+c.style.top="-10px"
+
+document.body.appendChild(c)
+
+let fall=setInterval(()=>{
+
+let top=parseFloat(c.style.top)
+c.style.top=top+5+"px"
+
+if(top>window.innerHeight){
+clearInterval(fall)
+c.remove()
+}
+
+},20)
+
+}
+
+}
+
+/* CURSOR SPARKLE */
+
+document.addEventListener("mousemove",e=>{
+
+let s=document.createElement("div")
+s.className="spark"
+s.style.left=e.clientX+"px"
+s.style.top=e.clientY+"px"
+
+document.body.appendChild(s)
+
+setTimeout(()=>s.remove(),600)
+
+})
+
+/* BALLOONS */
+
+for(let i=0;i<15;i++){
+
+let b=document.createElement("div")
+b.className="balloon"
+b.style.left=Math.random()*100+"%"
+b.style.background=`hsl(${Math.random()*360},80%,60%)`
+b.style.animationDuration=8+Math.random()*8+"s"
+
+document.body.appendChild(b)
+
+}
+
+/* PARTICLES */
 
 const canvas=document.getElementById("particles")
 const ctx=canvas.getContext("2d")
@@ -416,16 +571,15 @@ canvas.height=window.innerHeight
 
 let particles=[]
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 
 particles.push({
-
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-vx:(Math.random()-0.5)*2,
-vy:(Math.random()-0.5)*2,
-size:2+Math.random()*3
-
+vx:(Math.random()-0.5)*3,
+vy:(Math.random()-0.5)*3,
+size:2+Math.random()*4,
+color:`hsl(${Math.random()*360},100%,60%)`
 })
 
 }
@@ -444,7 +598,7 @@ if(p.y<0||p.y>canvas.height)p.vy*=-1
 
 ctx.beginPath()
 ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
-ctx.fillStyle="white"
+ctx.fillStyle=p.color
 ctx.fill()
 
 })
@@ -454,6 +608,15 @@ requestAnimationFrame(animate)
 }
 
 animate()
+
+/* ADD SOUND */
+
+function playPop(){
+
+let audio=new Audio("https://assets.mixkit.co/sfx/preview/mixkit-bubble-pop-up-alert-notification-2357.mp3")
+audio.play()
+
+}
 
 </script>
 
